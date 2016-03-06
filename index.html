@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Connect Four</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-</head>
+	<head>
+		<title>Connect Four</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div align="center">
+			<h1>Connect Four!</h1>
+			<p>Welcome to my game!</p>
 
-<body>
-	<div align="center">
-		<h1>Connect Four!</h1>
-		<p>Welcome to my game!</p>
+			<h3>Player 1's Turn...</h3>	<!-- <div id="turnSwitch"> -->
 
-		<canvas id="myCanvas" style="border:1px solid #000000;">
-		</canvas>
-	</div>
+			<canvas id="myCanvas" style="border:1px solid #000000;">
+			</canvas>
+		
 
-</body>
+		<br>
 
+		<!-- Reset game/win counter buttons -->
+		<button id="resetButton" type="button" class="btn btn-danger navbar-btn">Reset Game</button>
+		<button id="resetWinButton" type="button" class="btn btn-info navbar-btn">Reset Win Counts</button>
+
+		<br>
+
+		<!-- Using span to only change the numbers within this text 
+			 &nbsp; for space; 5 spaces in between p1 and p2 -->
+    	<b>Player 1 Score: <span id="scoreP1">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Player 2 Score: <span id="scoreP">0</span></b>
+
+		</div>
+
+	<!-- Loads main game JavaScript file -->	
+	<script type="text/javascript" src="script.js"></script>
+
+
+	</body>
 </html>
-
-
-<script>
-
-var width = 500;
-var height = 500;
-var context;
-
-window.onload = function() {
-	canvas = document.getElementById("myCanvas");
-	canvas.setAttribute("width", "" + width);
-	canvas.setAttribute("height", "" + height);
-
-	context = canvas.getContext("2d"); //Draw anything in 2D
-
-	drawBoard();
-}
-
-function drawBoard() {
-	context.clearRect(0, 0, width, height);
-}
-
-</script>
