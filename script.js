@@ -7,9 +7,15 @@ var indist = 3;	  // distance between circles
 var buff = 10; //canvasBuffer
 var width = (boxsize + indist) * 7 + 2 * buff; //7 circles horizontal
 var height = (boxsize + indist) * 6 + 2 * buff; //6 circles vertical
+var columnState = [0, 0, 0, 0, 0, 0, 0]; //Tracking circles per column
+var gameOver, plays;
 var context;
 var drawBoardBool;
 var boardState = new Array();
+
+/*
+	Note: Probably set var = doc.getById as var up front to reduce calls
+*/
 
 window.onload = function() {
 	canvas = document.getElementById("myCanvas");
@@ -52,6 +58,7 @@ function drawBoard() {
     for (j = 0; j < 7; j++) {
         boardState[i][j] = 0;		
     }
+
 }
 
 }
@@ -69,15 +76,43 @@ function nextPlayer() {
 		player.innerHTML = "1";
 }
 
+function updateWinCount(winner) {
 
-// Event Listeners
-document.getElementById("myCanvas").addEventListener("click", addDots, false);
-document.getElementById("resetButton").addEventListener("click", function() {
+	if (winner == "1") {
+		var score = document.getElementById("scoreP1").innerHTML;
+		document.getElementById("scoreP1").innerHTML = parseInt(score) + 1;
+	}
+	else {
+		var score = document.getElementById("scoreP2").innerHTML;
+		document.getElementById("scoreP2").innerHTML = parseInt(score) + 1;
+	}
+}
+
+function resetWinCount() {
+	console.log("Reset Win pressed!");
+
+	//Reset span labels
+	document.getElementById("scoreP1").innerHTML = 0;
+	document.getElementById("scoreP2").innerHTML = 0;
+}
+
+function resetGame() {
 	console.log("Reset Pressed!");
 
 	//Reset player turn display
 	document.getElementById("playerTurn").innerHTML = "1";
-})
-document.getElementById("resetWinButton").addEventListener("click", function() {
-	console.log("Reset Win pressed!");
-})
+	
+	// Reset columnState
+	columnState = [0,0,0,0,0,0,0];	
+    plays = 0;						
+    gameOver = false;
+
+    drawBoard();	
+
+}
+
+
+// Event Listeners
+document.getElementById("myCanvas").addEventListener("click", addDots, false);
+document.getElementById("resetButton").addEventListener("click", resetGame);
+document.getElementById("resetWinButton").addEventListener("click", resetWinCount);
