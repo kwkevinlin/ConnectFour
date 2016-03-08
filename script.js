@@ -9,6 +9,7 @@ var width = (boxsize + indist) * 7 + 2 * buff; //7 circles horizontal
 var height = (boxsize + indist) * 6 + 2 * buff; //6 circles vertical
 var context;
 var drawBoardBool;
+var boardState = new Array();
 
 window.onload = function() {
 	canvas = document.getElementById("myCanvas");
@@ -45,16 +46,37 @@ function drawBoard() {
 		}
 	}
 
+	//Initialize boardState -> become 2D and set to 0
+	for (i = 0; i < 6; i++) {
+    	boardState[i] = new Array();
+    for (j = 0; j < 7; j++) {
+        boardState[i][j] = 0;		
+    }
+}
+
 }
 
 function addDots() {
+	console.log("Adding dots!");
 
 }
 
-//False?
-document.getElementById("myCanvas").addEventListener("click", addDots(), false);
+function nextPlayer() {
+	var player = document.getElementById("playerTurn");
+	if (player.innerHTML == "1")
+		player.innerHTML = "2";
+	else
+		player.innerHTML = "1";
+}
+
+
+// Event Listeners
+document.getElementById("myCanvas").addEventListener("click", addDots, false);
 document.getElementById("resetButton").addEventListener("click", function() {
 	console.log("Reset Pressed!");
+
+	//Reset player turn display
+	document.getElementById("playerTurn").innerHTML = "1";
 })
 document.getElementById("resetWinButton").addEventListener("click", function() {
 	console.log("Reset Win pressed!");
